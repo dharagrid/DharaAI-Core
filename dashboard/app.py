@@ -7,6 +7,10 @@ import numpy as np
 import pandas as pd
 from PIL import Image
 from dhara.config import DIRS
+
+from dhara.feature_store import init_feature_store
+init_feature_store()
+
 from dhara.ndvi_pipeline import process_ndvi
 from dhara.predictor import predict_health
 from dhara.feature_store import FEAT_DB

@@ -17,6 +17,13 @@ st.set_page_config(page_title="Dhara.AI Dashboard", layout="wide")
 st.title("🌾 Dhara.AI — Precision Agriculture Intelligence")
 st.markdown("#### Visualize NDVI, field stats, and AI health predictions")
 
+
+# === Dhara Branding ===
+st.sidebar.image("https://raw.githubusercontent.com/dharagrid/DharaAI-Core/main/dashboard/dhara_logo.png", width=180)
+st.sidebar.markdown("**Dhara.AI** — Precision Agriculture Intelligence 🌾")
+st.markdown("<hr style='border:1px solid #E0E0E0;'>", unsafe_allow_html=True)
+st.markdown("<p style='text-align:center;color:#555;font-size:14px;'>© 2025 Dhara.AI — Vijayapura, India</p>", unsafe_allow_html=True)
+
 # === Sidebar ===
 st.sidebar.header("Options")
 tif_file = st.sidebar.text_input("Enter NDVI GeoTIFF path:", "")

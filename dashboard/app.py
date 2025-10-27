@@ -58,3 +58,35 @@ if tif_file:
         st.error(f"❌ Error: {e}")
 else:
     st.info("Please enter a valid NDVI GeoTIFF path to begin.")
+
+
+# === Dhara Analytics Panel ===
+import matplotlib.pyplot as plt
+
+st.subheader("📊 Dhara.AI Analytics — NDVI Time Series")
+
+try:
+    with sqlite3.connect(FEAT_DB) as conn:
+        df = pd.read_sql_query("SELECT * FROM field_features ORDER BY scan_date ASC", conn)
+
+    if not df.empty:
+        farms = df["farm_id"].unique().tolist()
+        selected_farms = st.multiselect("Select farms to compare:", farms, default=farms[:1])
+
+        if selected_farms:
+            fig, ax = plt.subplots()
+            for farm in selected_farms:
+                dsub = df[df["farm_id"] == farm]
+                ax.plot(dsub["scan_date"], dsub["mean_ndvi"], marker="o", label=farm)
+            ax.set_xlabel("Date")
+            ax.set_ylabel("Mean NDVI")
+            ax.set_title("NDVI Trend Over Time")
+            ax.legend()
+            st.pyplot(fig)
+
+        st.metric("Latest Mean NDVI", f"{df['mean_ndvi'].iloc[-1]:.3f}")
+        st.metric("Historical Average NDVI", f"{df['mean_ndvi'].mean():.3f}")
+    else:
+        st.info("No NDVI data found in feature store yet.")
+except Exception as e:
+    st.error(f"Analytics error: {e}")

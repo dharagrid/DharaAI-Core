@@ -1,0 +1,7 @@
+streamlit
+numpy
+pandas
+rasterio
+tensorflow
+Pillow
+sqlite-utils

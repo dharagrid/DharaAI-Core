@@ -5,3 +5,5 @@ rasterio
 tensorflow
 Pillow
 sqlite-utils
+
+matplotlib
